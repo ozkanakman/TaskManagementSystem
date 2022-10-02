@@ -1,0 +1,57 @@
+<h1>{{ title }}</h1>
+<h3>Comment</h3>
+<hr />
+
+<form [formGroup]="commentForm" (ngSubmit)="save()">
+
+
+    <div class="form-group row">
+        <label class="control-label col-md-12">Comment</label>
+        <div class="col-md-4">
+            <textarea ng-model="myTextarea" formControlName="commentText" style="width:415px;height:100px"></textarea>
+        </div>
+        <span class="text-danger" *ngIf="
+        (registerFormControl.commentText.touched || submitted) &&
+        registerFormControl.commentText.errors?.required
+      ">
+            Comment is required.
+        </span>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-md-12" for="CommentType">Comment Type</label>
+        <div class="col-md-4">
+            <select class="form-control" data-val="true" formControlName="commentType">
+                <option value="">-- Select Comment Type --</option>
+                <option value="Good Comment">Good Comment</option>
+                <option value="Bad Comment">Bad Comment</option>
+            </select>
+        </div>
+        <span class="text-danger" *ngIf="
+        (registerFormControl.commentType.touched || submitted) &&
+        registerFormControl.commentType.errors?.required
+      ">
+            Task Type is required
+        </span>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-md-12">Reminder Date</label>
+        <div class="col-md-4">
+            <input class="form-control" type="date" formControlName="reminderDate" />
+        </div>
+        <span class="text-danger" *ngIf="
+        (registerFormControl.reminderDate.touched || submitted) &&
+        registerFormControl.reminderDate.errors?.required
+      ">
+            Reminder Date is required.
+        </span>
+    </div>
+
+    <br />
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        &nbsp;
+        <button class="btn btn-danger" (click)="cancel()">Cancel</button>
+    </div>
+</form>

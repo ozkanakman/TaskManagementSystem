@@ -1,0 +1,56 @@
+<h1>Task List</h1>
+
+<p *ngIf="!tasks"><em>Loading...</em></p>
+
+<div>
+  <button class="btn btn-primary" [routerLink]="['/add-task']">
+    <span><i class="fa fa-user-plus" aria-hidden="true"></i></span> Add New
+    Task
+  </button>
+</div>
+
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Created Date</th>
+            <th>Required by Date</th>
+            <th>Task Status</th>
+            <th>Task Type</th>
+            <th>Assigned User</th>
+            <th>Next Action Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let task of tasks">
+            <td>{{ task.id }}</td>
+            <td>{{ task.createDate | date: 'dd.MM.YYYY'}}</td>
+            <td>{{ task.requiredByDate | date: 'dd.MM.YYYY'}}</td>
+            <td>{{ task.taskDescription }}</td>
+            <td>{{ task.taskStatus }}</td>
+            <td>{{ task.assignedUser }}</td>
+            <td>{{ task.nextActionDate | date: 'dd.MM.YYYY'}}</td>
+            <td></td>
+            <td>
+                <button class="btn btn-outline-dark"
+                        [routerLink]="['/fetch-comment', task.id]">
+                    <span><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    Comments
+                </button>
+                &nbsp;
+                <button class="btn btn-outline-dark"
+                        [routerLink]="['/task/edit/', task.id]">
+                    <span><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    Edit
+                </button>
+                &nbsp;
+                <button class="btn btn-outline-danger"
+                        (click)="delete(task.id)">
+                    <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+                    Delete
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

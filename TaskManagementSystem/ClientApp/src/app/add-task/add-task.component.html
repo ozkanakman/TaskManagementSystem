@@ -1,0 +1,104 @@
+<h1>{{ title }}</h1>
+<h3>Task</h3>
+<hr />
+
+<form [formGroup]="taskForm" (ngSubmit)="save()">
+    <div class="form-group row">
+        <label class="control-label col-md-12">Required by Date</label>
+        <div class="col-md-4">
+            <input class="form-control" type="date" formControlName="requiredByDate" />
+        </div>
+        <span class="text-danger" *ngIf="
+        (registerFormControl.requiredByDate.touched || submitted) &&
+        registerFormControl.requiredByDate.errors?.required
+      ">
+            Required By Date is required.
+        </span>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-md-12">Task Description</label>
+        <div class="col-md-4">
+            <textarea ng-model="myTextarea" formControlName="taskDescription" style="width:415px;height:100px"></textarea>
+        </div>
+        <span class="text-danger" *ngIf="
+        (registerFormControl.taskDescription.touched || submitted) &&
+        registerFormControl.taskDescription.errors?.required
+      ">
+            Task Description is required.
+        </span>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-md-12" for="TaskStatus">Task Status</label>
+        <div class="col-md-4">
+            <select class="form-control" data-val="true" formControlName="taskStatus">
+                <option value="">-- Select Status --</option>
+                <option value="Active">Active</option>
+                <option value="Passive">Passive</option>
+            </select>
+        </div>
+        <span class="text-danger" *ngIf="
+        (registerFormControl.taskStatus.touched || submitted) &&
+        registerFormControl.taskStatus.errors?.required
+      ">
+            Task Status is required
+        </span>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-md-12" for="TaskType">Task Type</label>
+        <div class="col-md-4">
+            <select class="form-control" data-val="true" formControlName="taskType">
+                <option value="">-- Select Task Type --</option>
+                <option value="Development">Development</option>
+                <option value="Bug Fix">Bug Fix</option>
+                <option value="Analysis">Analysis</option>
+                <option value="Testing">Testing</option>
+            </select>
+        </div>
+        <span class="text-danger" *ngIf="
+        (registerFormControl.taskType.touched || submitted) &&
+        registerFormControl.taskType.errors?.required
+      ">
+            Task Type is required
+        </span>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-md-12" for="AssignedUser">Assigned User</label>
+        <div class="col-md-4">
+            <select class="form-control" data-val="true" formControlName="assignedUser">
+                <option value="">--Select User--</option>
+                <option value="ozkan akman">ozkan akman</option>
+                <option value="esra akman">esra akman</option>
+                <option value="baris akman">baris akman</option>
+            </select>
+        </div>
+        <span class="text-danger" *ngIf="
+        (registerFormControl.assignedUser.touched || submitted) &&
+        registerFormControl.assignedUser.errors?.required
+      ">
+            Assigned User is required
+        </span>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-md-12">Next Action Date</label>
+        <div class="col-md-4">
+            <input class="form-control" type="date" formControlName="nextActionDate" />
+        </div>
+        <span class="text-danger" *ngIf="
+        (registerFormControl.nextActionDate.touched || submitted) &&
+        registerFormControl.nextActionDate.errors?.required
+      ">
+            Next Action Date is required.
+        </span>
+    </div>
+
+    <br />
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        &nbsp;
+        <button class="btn btn-danger" (click)="cancel()">Cancel</button>
+    </div>
+</form>

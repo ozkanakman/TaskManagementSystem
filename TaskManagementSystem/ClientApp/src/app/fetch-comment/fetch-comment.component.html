@@ -1,0 +1,75 @@
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    .column {
+        float: left;
+        width: 50%;
+        padding: 10px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+</style>
+<h1>Comment List</h1>
+
+<p *ngIf="!comments"><em>Loading...</em></p>
+
+<div class="row">
+    <div class="column">
+        <button class="btn btn-primary" [routerLink]="['/add-comment',{ taskId: taskId }]">
+            <span><i class="fa fa-user-plus" aria-hidden="true"></i></span> Add New
+            Comment
+        </button>
+        &nbsp;
+        <button class="btn btn-primary" [routerLink]="['']">
+            <span><i class="fa fa-user-plus" aria-hidden="true"></i></span> Task List
+        </button>
+    </div>
+    <div class="column">
+        <input class="form-control" type="text" placeholder="Search..." #inputstring (keyup)="applyFilter(inputstring.value)" />
+    </div>
+</div>
+
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Task Id</th>
+            <th>Date Added</th>
+            <th>Comment Text</th>
+            <th>Comment Type</th>
+            <th>Reminder Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let comment of comments">
+            <td>{{ comment.id }}</td>
+            <td>{{ comment.taskId }}</td>
+            <td>{{ comment.dateAdded | date: 'dd.MM.YYYY'}}</td>
+            <td>{{ comment.commentText }}</td>
+            <td>{{ comment.commentType }}</td>
+            <td>{{ comment.reminderDate | date: 'dd.MM.YYYY'}}</td>
+            <td></td>
+            <td>
+                <button class="btn btn-outline-dark"
+                        [routerLink]="['/comment/edit/', comment.id,{ taskId: taskId }]">
+                    <span><i class="fa fa-pencil" aria-hidden="true"></i></span>
+                    Edit
+                </button>
+                &nbsp;
+                <button class="btn btn-outline-danger"
+                        (click)="delete(comment.id)">
+                    <span><i class="fa fa-trash" aria-hidden="true"></i></span>
+                    Delete
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
