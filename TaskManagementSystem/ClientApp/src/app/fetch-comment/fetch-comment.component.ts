@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Comment } from '../models/comment';
 import { TaskManagementSystemService } from '../services/taskManagementSystem.service';
 
@@ -17,6 +17,7 @@ export class FetchCommentComponent implements OnInit {
   constructor(
     private taskManagementSystemService: TaskManagementSystemService,
     private avRoute: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -52,7 +53,10 @@ export class FetchCommentComponent implements OnInit {
 
     this.comments = this.dataSource.filter((item) =>
       JSON.stringify(Object.values(item)).toLowerCase().includes(filterValue.toLowerCase())
-    );
-    
+    );    
+  }
+
+  doubleClickOnComment(id: number) {
+    this.router.navigate(['/comment/edit/', id, { taskId: this.taskId }]);
   }
 }
