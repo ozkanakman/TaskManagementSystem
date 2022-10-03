@@ -40,7 +40,6 @@ export class AddTaskComponent implements OnInit {
       requiredByDate: ['', [Validators.required]],
       taskDescription: ['', [Validators.required]],
       assignedUser: ['', [Validators.required]],
-      nextActionDate: ['', [Validators.required]],
     });
   }
 
@@ -62,8 +61,7 @@ export class AddTaskComponent implements OnInit {
               taskDescription: response.taskDescription,
               taskStatus: response.taskStatus,
               taskType: response.taskType,
-              assignedUser: response.assignedUser,
-              nextActionDate: this.datepipe.transform(response.nextActionDate, 'yyyy-MM-dd')
+              assignedUser: response.assignedUser
             });
         },
         (error) => console.error(error)

@@ -82,19 +82,6 @@
             Assigned User is required
         </span>
     </div>
-    <div class="form-group row">
-        <label class="control-label col-md-12">Next Action Date</label>
-        <div class="col-md-4">
-            <input class="form-control" type="date" formControlName="nextActionDate" />
-        </div>
-        <span class="text-danger" *ngIf="
-        (registerFormControl.nextActionDate.touched || submitted) &&
-        registerFormControl.nextActionDate.errors?.required
-      ">
-            Next Action Date is required.
-        </span>
-    </div>
-
     <br />
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Save</button>

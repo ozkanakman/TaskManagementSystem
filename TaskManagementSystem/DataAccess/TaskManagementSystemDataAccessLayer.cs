@@ -79,6 +79,12 @@ namespace TaskManagementSystem.DataAccess
         {
             try
             {
+                var columnName = "TaskId";
+                var columnValue = new SqlParameter("columnValue", task.Id);
+                Models.Comment comment = db.Comments.FromSqlRaw($"SELECT * FROM [Comment] WHERE {columnName} = @columnValue AND ReminderDate > getdate()", columnValue).OrderBy(c => c.ReminderDate).FirstOrDefault();
+                if (comment != null)
+                    task.NextActionDate = comment.ReminderDate;
+
                 db.Entry(task).State = EntityState.Modified;
                 db.SaveChanges();
             }
@@ -148,6 +154,8 @@ namespace TaskManagementSystem.DataAccess
             {
                 db.Comments.Add(comment);
                 db.SaveChanges();
+
+                UpdateTask(GetTaskData(comment.TaskId));
             }
             catch
             {
@@ -161,6 +169,8 @@ namespace TaskManagementSystem.DataAccess
             {
                 db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();
+
+                UpdateTask(GetTaskData(comment.TaskId));
             }
             catch
             {
